@@ -29,7 +29,13 @@ const color = {
 export const theme = {
   color,
   font: {
-    serif: Platform.OS == "android" ? "serif" : "Georgia"
+    serif: "LibreBaskerville-Regular",
+    serifBold: "LibreBaskerville-Bold",
+    serifItalic: "LibreBaskerville-Italic",
+    sans: "Roboto-Medium",
+    sansBold: "Roboto-Bold",
+    sansLight: "Roboto-Light",
+    sansBlack: "Roboto-Black"
   },
   space: {
     xs: "4px",

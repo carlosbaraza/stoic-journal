@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, SafeAreaView } from "react-native";
+import { StatusBar } from "react-native";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -9,6 +9,7 @@ import { NewJournalScreen } from "./screens/NewJournalScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { GlobalProvider } from "./shared/context";
 import styled from "styled-components/native";
+import { useAsyncAssets } from "./shared/assets";
 
 const TopSafeAreaPadding = styled.SafeAreaView`
   flex: 0;
@@ -43,7 +44,7 @@ function BottomNavigator() {
         pressOpacity: 1,
         labelStyle: {
           textTransform: "none",
-          fontFamily: theme.font.serif
+          fontFamily: theme.font.sansBold
         },
         style: {
           backgroundColor: theme.color.navbarBackground
@@ -83,6 +84,8 @@ function BottomNavigator() {
 }
 
 export default function App() {
+  useAsyncAssets();
+
   return (
     <>
       <StatusBar hidden={false} />
