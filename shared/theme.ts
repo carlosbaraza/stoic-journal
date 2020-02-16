@@ -28,6 +28,9 @@ const color = {
 
 export const theme = {
   color,
+  font: {
+    serif: Platform.OS == "android" ? "serif" : "Georgia"
+  },
   space: {
     xs: "4px",
     s: "8px",

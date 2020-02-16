@@ -28,13 +28,25 @@ function BottomNavigator() {
       tabBarPosition="bottom"
       tabBarOptions={{
         tabStyle: {
-          backgroundColor: theme.color.navbarBackground,
           borderTopColor: theme.color.navbarBorder
+        },
+        iconStyle: {
+          justifyContent: "center",
+          alignItems: "center"
         },
         activeTintColor: "#000",
         showIcon: true,
         indicatorStyle: {
           height: 0
+        },
+        pressColor: theme.color.background,
+        pressOpacity: 1,
+        labelStyle: {
+          textTransform: "none",
+          fontFamily: theme.font.serif
+        },
+        style: {
+          backgroundColor: theme.color.navbarBackground
         }
       }}
     >
@@ -42,6 +54,7 @@ function BottomNavigator() {
         name="History"
         component={HomeScreen}
         options={{
+          tabBarLabel: "History",
           tabBarIcon: props => (
             <Entypo name="calendar" color={props.color} size={props.focused ? 24 : 20} />
           )
