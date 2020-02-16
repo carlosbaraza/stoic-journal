@@ -17,7 +17,6 @@ type Props = {};
 
 export const HomeScreen = (props: Props) => {
   const { entries } = useGlobalState();
-  console.log(entries);
   return (
     <Container>
       <Heading>Journal entries</Heading>

@@ -48,10 +48,10 @@ const questions: QuestionType[] = [
 export function NewJournalScreen() {
   const dispatch = useGlobalDispatch();
 
-  const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState(questions.map(() => ""));
 
   const onSave = () => {
-    const journalAnswers = answers.map((answer, i) => ({ question: questions[i], answer }));
+    const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
     dispatch({
       type: "SAVE_JOURNAL",
       journal: { answers: journalAnswers, id: uuid(), date: new Date() }
