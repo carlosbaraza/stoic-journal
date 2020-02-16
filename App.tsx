@@ -48,7 +48,7 @@ function Tabs() {
 export default function App() {
   return (
     <>
-      <StatusBar hidden={false} />
+      <StatusBar hidden={true} />
       <GlobalProvider>
         <NavigationContainer>
           <Tabs />
