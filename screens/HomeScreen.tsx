@@ -6,7 +6,7 @@ import { StatusBar, Platform, FlatList, View, Text } from "react-native";
 import { useGlobalState } from "../shared/context";
 import { JournalEntry } from "../components/JournalEntry";
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
   padding: ${theme.space.l};
   padding-top: ${paddingTop};
@@ -17,10 +17,13 @@ type Props = {};
 
 export const HomeScreen = (props: Props) => {
   const { entries } = useGlobalState();
+  console.log(entries);
   return (
     <Container>
       <Heading>Journal entries</Heading>
-      <FlatList data={entries} renderItem={entry => <JournalEntry entry={entry.item} />} />
+      {entries.map(entry => (
+        <JournalEntry key={entry.id} entry={entry} />
+      ))}
     </Container>
   );
 };

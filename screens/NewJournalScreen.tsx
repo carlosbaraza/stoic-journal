@@ -8,18 +8,18 @@ import { theme, paddingTop } from "../shared/theme";
 import { useGlobalDispatch } from "../shared/context";
 import { uuid } from "uuidv4";
 
-export const ScrollView = styled.ScrollView`
+const ScrollView = styled.ScrollView`
   background-color: ${theme.color.background};
 `;
 
-export const Container = styled.View`
+const Container = styled.View`
   flex: 1;
   padding: ${theme.space.l};
   padding-top: ${paddingTop};
   background-color: ${theme.color.background};
 `;
 
-export const FooterContainer = styled.View`
+const FooterContainer = styled.View`
   flex: 0;
   padding: ${theme.space.l};
 `;
