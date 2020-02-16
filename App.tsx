@@ -1,19 +1,43 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, SafeAreaView } from "react-native";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { theme } from "./shared/theme";
 import { HomeScreen } from "./screens/HomeScreen";
 import { NewJournalScreen } from "./screens/NewJournalScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { GlobalProvider } from "./shared/context";
+import styled from "styled-components/native";
 
-const Tab = createMaterialBottomTabNavigator();
+const TopSafeAreaPadding = styled.SafeAreaView`
+  flex: 0;
+  background-color: ${theme.color.background};
+`;
 
-function Tabs() {
+const MainSafeArea = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${theme.color.navbarBackground};
+`;
+
+const Tab = createMaterialTopTabNavigator();
+
+function BottomNavigator() {
   return (
-    <Tab.Navigator barStyle={{ backgroundColor: theme.color.primary }}>
+    <Tab.Navigator
+      tabBarPosition="bottom"
+      tabBarOptions={{
+        tabStyle: {
+          backgroundColor: theme.color.navbarBackground,
+          borderTopColor: theme.color.navbarBorder
+        },
+        activeTintColor: "#000",
+        showIcon: true,
+        indicatorStyle: {
+          height: 0
+        }
+      }}
+    >
       <Tab.Screen
         name="History"
         component={HomeScreen}
@@ -48,10 +72,13 @@ function Tabs() {
 export default function App() {
   return (
     <>
-      <StatusBar hidden={true} />
+      <StatusBar hidden={false} />
+      <TopSafeAreaPadding />
       <GlobalProvider>
         <NavigationContainer>
-          <Tabs />
+          <MainSafeArea>
+            <BottomNavigator />
+          </MainSafeArea>
         </NavigationContainer>
       </GlobalProvider>
     </>

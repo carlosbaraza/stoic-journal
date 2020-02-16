@@ -12,6 +12,12 @@ const color = {
   button: primary,
   text: "#333",
   placeholder: "#888",
+  navbarBackground: Color(background)
+    .lighten(0.1)
+    .toString(),
+  navbarBorder: Color(background)
+    .darken(0.1)
+    .toString(),
   flatListButtonBackground: Color(background)
     .lighten(0.1)
     .toString(),
