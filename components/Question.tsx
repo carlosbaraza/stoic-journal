@@ -4,8 +4,8 @@ import { theme } from "../shared/theme";
 import { Heading } from "./Heading";
 import { Question as QuestionType } from "../types";
 
-const Container = styled.View`
-  margin-top: ${theme.space.l};
+const Container = styled.View<{ isFirstChild: boolean }>`
+  margin-top: ${({ isFirstChild }) => (isFirstChild ? 0 : theme.space.l)};
 `;
 
 const TextInput = styled.TextInput`
@@ -14,12 +14,13 @@ const TextInput = styled.TextInput`
 
 type Props = {
   question: QuestionType;
+  childIndex?: number;
 };
 
 export const Question = (props: Props) => {
   const { question } = props;
   return (
-    <Container>
+    <Container isFirstChild={props.childIndex === 0}>
       <Heading>{question.text}</Heading>
       <TextInput
         placeholder={question.placeholder}

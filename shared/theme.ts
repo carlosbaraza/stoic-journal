@@ -1,3 +1,7 @@
+import { Platform, StatusBar } from "react-native";
+
+export const paddingTop = `${Platform.OS == "ios" ? 30 + 32 : StatusBar.currentHeight + 32}px`;
+
 const primary = "#4281A4";
 
 const color = {
@@ -8,7 +12,7 @@ const color = {
   placeholder: "#888"
 };
 
-export var theme = {
+export const theme = {
   color,
   space: {
     xs: "4px",
