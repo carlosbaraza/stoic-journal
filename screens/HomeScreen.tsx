@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components/native";
 import { theme, paddingTop } from "../shared/theme";
 import { Heading } from "../components/Heading";
-import { StatusBar, Platform } from "react-native";
+import { StatusBar, Platform, FlatList, View, Text } from "react-native";
+import { useGlobalState } from "../shared/context";
+import { JournalEntry } from "../components/JournalEntry";
 
 const Container = styled.View`
   flex: 1;
@@ -14,9 +16,11 @@ const Container = styled.View`
 type Props = {};
 
 export const HomeScreen = (props: Props) => {
+  const { entries } = useGlobalState();
   return (
     <Container>
-      <Heading>Hello</Heading>
+      <Heading>Journal entries</Heading>
+      <FlatList data={entries} renderItem={entry => <JournalEntry entry={entry.item} />} />
     </Container>
   );
 };

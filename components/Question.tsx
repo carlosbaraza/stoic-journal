@@ -15,6 +15,8 @@ const TextInput = styled.TextInput`
 type Props = {
   question: QuestionType;
   childIndex?: number;
+  onChangeText(text: string): void;
+  value: string;
 };
 
 export const Question = (props: Props) => {
@@ -25,7 +27,9 @@ export const Question = (props: Props) => {
       <TextInput
         placeholder={question.placeholder}
         multiline
+        value={props.value}
         placeholderTextColor={theme.color.placeholder}
+        onChangeText={props.onChangeText}
       />
     </Container>
   );

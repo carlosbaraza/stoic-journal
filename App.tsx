@@ -6,6 +6,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { theme } from "./shared/theme";
 import { HomeScreen } from "./screens/HomeScreen";
 import { NewJournalScreen } from "./screens/NewJournalScreen";
+import { GlobalProvider } from "./shared/context";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -38,9 +39,11 @@ export default function App() {
   return (
     <>
       <StatusBar hidden={false} />
-      <NavigationContainer>
-        <Tabs />
-      </NavigationContainer>
+      <GlobalProvider>
+        <NavigationContainer>
+          <Tabs />
+        </NavigationContainer>
+      </GlobalProvider>
     </>
   );
 }
