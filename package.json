@@ -13,6 +13,7 @@
     "@react-navigation/material-bottom-tabs": "^5.0.5",
     "@react-navigation/material-top-tabs": "^5.0.5",
     "@react-navigation/native": "^5.0.5",
+    "@react-navigation/stack": "^5.0.5",
     "@types/color": "^3.0.1",
     "@types/moment": "^2.13.0",
     "@types/styled-components": "^4.4.3",

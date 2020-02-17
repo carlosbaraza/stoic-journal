@@ -26,7 +26,21 @@ function globalReduderAsyncStorageWrapper(state: State, action: Action): State {
 function globalReducer(state: State, action: Action): State {
   switch (action.type) {
     case "SAVE_JOURNAL": {
-      return { ...state, entries: [...state.entries, action.journal] };
+      const existingEntry = state.entries.find(e => e.id === action.journal.id);
+      if (existingEntry) {
+        return {
+          ...state,
+          entries: state.entries.map(entry => {
+            if (entry.id === action.journal.id) {
+              return action.journal;
+            } else {
+              return entry;
+            }
+          })
+        };
+      } else {
+        return { ...state, entries: [...state.entries, action.journal] };
+      }
     }
     case "SET_STATE": {
       return action.state;

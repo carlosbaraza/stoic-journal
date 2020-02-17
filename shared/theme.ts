@@ -1,7 +1,8 @@
 import { Platform, StatusBar } from "react-native";
 import Color from "color";
 
-export const paddingTop = `${Platform.OS == "ios" ? 30 + 32 : StatusBar.currentHeight + 32}px`;
+export const statusBarHeight = Platform.OS === "android" ? StatusBar.currentHeight : 0;
+export const paddingTop = `${Platform.OS == "ios" ? 30 + 32 : statusBarHeight + 32}px`;
 
 const primary = "#4281A4";
 const background = "#EAD2AC";

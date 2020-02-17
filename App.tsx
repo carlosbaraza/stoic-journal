@@ -1,10 +1,10 @@
 import React from "react";
-import { StatusBar, SafeAreaView, Text, Image } from "react-native";
+import { StatusBar, SafeAreaView, Text, Image, Platform } from "react-native";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { theme } from "./shared/theme";
-import { HomeScreen } from "./screens/HomeScreen";
+import { theme, statusBarHeight } from "./shared/theme";
+import { JournalNavigator } from "./screens/JournalList/JournalNavigator";
 import { NewJournalScreen } from "./screens/NewJournalScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { GlobalProvider } from "./shared/context";
@@ -19,10 +19,6 @@ const TopSafeAreaPadding = styled.SafeAreaView`
 const MainSafeArea = styled.SafeAreaView`
   flex: 1;
   background-color: ${theme.color.navbarBackground};
-`;
-
-const ScreenContainer = styled.KeyboardAvoidingView`
-  flex: 1;
 `;
 
 const LoadingContainer = styled.SafeAreaView`
@@ -68,10 +64,10 @@ function BottomNavigator() {
       }}
     >
       <Tab.Screen
-        name="History"
-        component={HomeScreen}
+        name="Journal"
+        component={JournalNavigator}
         options={{
-          tabBarLabel: "History",
+          tabBarLabel: "Journal",
           tabBarIcon: props => (
             <Entypo name="calendar" color={props.color} size={props.focused ? 24 : 20} />
           )
@@ -118,13 +114,13 @@ export default function App() {
     <>
       <StatusBar hidden={false} />
       <TopSafeAreaPadding />
-      <GlobalProvider>
-        <NavigationContainer>
-          <MainSafeArea>
+      <MainSafeArea>
+        <GlobalProvider>
+          <NavigationContainer>
             <BottomNavigator />
-          </MainSafeArea>
-        </NavigationContainer>
-      </GlobalProvider>
+          </NavigationContainer>
+        </GlobalProvider>
+      </MainSafeArea>
     </>
   );
 }
