@@ -77,6 +77,7 @@ function BottomNavigator() {
         name="New"
         component={NewJournalScreen}
         options={{
+          tabBarLabel: "Today",
           tabBarIcon: props => (
             <Entypo name="new-message" color={props.color} size={props.focused ? 24 : 20} />
           )
