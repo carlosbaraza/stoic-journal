@@ -42,6 +42,18 @@ const questions: QuestionType[] = [
   {
     text: "What could I have done differently?",
     placeholder: "I was lucky enough to meet Marco, and I should have been fully present..."
+  },
+  {
+    text: "What am I grateful for?",
+    placeholder: "Having the opportunity to work with such amazing people..."
+  },
+  {
+    text: "What would make today great?",
+    placeholder: "Meeting Marco again..."
+  },
+  {
+    text: "What is my affirmation (mantra) for the day?",
+    placeholder: "Focus and kindness"
   }
 ];
 
@@ -69,7 +81,7 @@ export function NewJournalScreen() {
             value={answers[i]}
             onChangeText={text => {
               answers[i] = text;
-              setAnswers(answers);
+              setAnswers([...answers]);
             }}
           />
         ))}
