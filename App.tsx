@@ -21,6 +21,10 @@ const MainSafeArea = styled.SafeAreaView`
   background-color: ${theme.color.navbarBackground};
 `;
 
+const ScreenContainer = styled.KeyboardAvoidingView`
+  flex: 1;
+`;
+
 const LoadingContainer = styled.SafeAreaView`
   flex: 1;
   background-color: ${theme.color.background};

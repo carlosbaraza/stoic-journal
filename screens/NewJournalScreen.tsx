@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 import { Question as QuestionType } from "../types";
 import { Question } from "../components/Question";
 import { SaveButton } from "../components/SaveButton";
+import { ScreenContainer } from "../components/ScreenContainer";
 import styled from "styled-components/native";
 import { theme, paddingTop } from "../shared/theme";
 import { useGlobalDispatch } from "../shared/context";
@@ -71,24 +72,26 @@ export function NewJournalScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Container>
-        {questions.map((question, i) => (
-          <Question
-            key={i}
-            question={question}
-            childIndex={i}
-            value={answers[i]}
-            onChangeText={text => {
-              answers[i] = text;
-              setAnswers([...answers]);
-            }}
-          />
-        ))}
-      </Container>
-      <FooterContainer>
-        <SaveButton onPress={onSave} />
-      </FooterContainer>
-    </ScrollView>
+    <ScreenContainer>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Container>
+          {questions.map((question, i) => (
+            <Question
+              key={i}
+              question={question}
+              childIndex={i}
+              value={answers[i]}
+              onChangeText={text => {
+                answers[i] = text;
+                setAnswers([...answers]);
+              }}
+            />
+          ))}
+        </Container>
+        <FooterContainer>
+          <SaveButton onPress={onSave} />
+        </FooterContainer>
+      </ScrollView>
+    </ScreenContainer>
   );
 }
