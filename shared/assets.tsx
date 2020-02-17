@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as Font from "expo-font";
 
 const loadAssetsAsync = async () => {
@@ -21,8 +21,10 @@ const loadAssetsAsync = async () => {
   });
 };
 
-export const useAsyncAssets = () => {
+export const useAsyncAssets = (): boolean => {
+  let [loading, setLoading] = useState(true);
   useEffect(() => {
-    loadAssetsAsync();
+    loadAssetsAsync().then(() => setLoading(false));
   }, []);
+  return loading;
 };

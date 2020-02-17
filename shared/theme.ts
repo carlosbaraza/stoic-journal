@@ -1,12 +1,5 @@
 import { Platform, StatusBar } from "react-native";
 import Color from "color";
-import {
-  setCustomView,
-  setCustomTextInput,
-  setCustomText,
-  setCustomImage,
-  setCustomTouchableOpacity
-} from "react-native-global-props";
 
 export const paddingTop = `${Platform.OS == "ios" ? 30 + 32 : StatusBar.currentHeight + 32}px`;
 
@@ -52,10 +45,3 @@ export const theme = {
     xl: "64px"
   }
 };
-
-setCustomTextInput({
-  style: {
-    fontFamily: theme.font.serif
-  },
-  placeholderStyle: { fontFamily: theme.font.serif }
-});

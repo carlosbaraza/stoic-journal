@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, SafeAreaView, Text, Image } from "react-native";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -19,6 +19,18 @@ const TopSafeAreaPadding = styled.SafeAreaView`
 const MainSafeArea = styled.SafeAreaView`
   flex: 1;
   background-color: ${theme.color.navbarBackground};
+`;
+
+const LoadingContainer = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${theme.color.navbarBackground};
+  justify-content: center;
+  align-items: center;
+`;
+
+const LogoImage = styled.Image`
+  height: 100px;
+  width: 90px;
 `;
 
 const Tab = createMaterialTopTabNavigator();
@@ -84,7 +96,19 @@ function BottomNavigator() {
 }
 
 export default function App() {
-  useAsyncAssets();
+  const loading = useAsyncAssets();
+
+  if (loading) {
+    return (
+      <>
+        <StatusBar hidden={false} />
+
+        <LoadingContainer>
+          <LogoImage source={require("./assets/stoic-journal-icon-512w.png")} />
+        </LoadingContainer>
+      </>
+    );
+  }
 
   return (
     <>
