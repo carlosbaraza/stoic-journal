@@ -23,7 +23,7 @@ const MainSafeArea = styled.SafeAreaView`
 
 const LoadingContainer = styled.SafeAreaView`
   flex: 1;
-  background-color: ${theme.color.navbarBackground};
+  background-color: ${theme.color.background};
   justify-content: center;
   align-items: center;
 `;
