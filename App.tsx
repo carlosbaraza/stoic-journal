@@ -13,7 +13,7 @@ import { useAsyncAssets } from "./shared/assets";
 
 const TopSafeAreaPadding = styled.SafeAreaView`
   flex: 0;
-  background-color: ${theme.color.background};
+  background-color: ${theme.color.topbar.background};
 `;
 
 const MainSafeArea = styled.SafeAreaView`

@@ -15,8 +15,8 @@ export const JournalNavigator = (props: Props) => {
     <Stack.Navigator
       screenOptions={{
         ...TransitionPresets.SlideFromRightIOS,
-        headerStyle: { backgroundColor: theme.color.background },
-        headerTitleStyle: { fontFamily: theme.font.serifBold },
+        headerStyle: { backgroundColor: theme.color.topbar.background },
+        headerTitleStyle: { fontFamily: theme.font.serifBold, color: theme.color.topbar.color },
         headerBackTitle: "Back",
         animationEnabled: true
       }}
