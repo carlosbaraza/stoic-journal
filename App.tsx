@@ -41,7 +41,8 @@ function BottomNavigator() {
       tabBarPosition="bottom"
       tabBarOptions={{
         tabStyle: {
-          borderTopColor: theme.color.navbarBorder
+          borderTopColor: theme.color.navbarBorder,
+          borderTopWidth: 3
         },
         iconStyle: {
           justifyContent: "center",
@@ -103,7 +104,6 @@ export default function App() {
     return (
       <>
         <StatusBar hidden={false} />
-
         <LoadingContainer>
           <LogoImage source={require("./assets/stoic-journal-icon-512w.png")} />
         </LoadingContainer>

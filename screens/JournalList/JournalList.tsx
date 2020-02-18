@@ -9,8 +9,13 @@ import { View, Text } from "react-native";
 
 const ScrollContainer = styled.ScrollView`
   flex: 1;
-  padding: ${theme.space.l};
   background-color: ${theme.color.background};
+`;
+
+const InnerContainer = styled.View`
+  flex: 1;
+  padding: ${theme.space.l};
+  overflow: visible;
 `;
 
 type Props = {
@@ -22,10 +27,12 @@ export const JournalList = (props: Props) => {
 
   return (
     <ScreenContainer>
-      <ScrollContainer contentContainerStyle={{ paddingBottom: 64 }}>
-        {entries.map((entry, i) => (
-          <JournalEntry key={entry.id} entry={entry} isFirstChild={i === 0} />
-        ))}
+      <ScrollContainer>
+        <InnerContainer>
+          {entries.map((entry, i) => (
+            <JournalEntry key={entry.id} entry={entry} isFirstChild={i === 0} />
+          ))}
+        </InnerContainer>
       </ScrollContainer>
     </ScreenContainer>
   );

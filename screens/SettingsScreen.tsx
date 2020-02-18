@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { theme, paddingTop } from "../shared/theme";
+import { theme, statusBarHeight } from "../shared/theme";
 import { Heading } from "../components/Heading";
 import { FlatListButton } from "../components/FlatListButton";
 import { useGlobalDispatch } from "../shared/context";
@@ -8,7 +8,7 @@ import { Alert } from "react-native";
 
 const Container = styled.ScrollView`
   flex: 1;
-  padding-top: ${paddingTop};
+  padding-top: ${theme.space.l};
   background-color: ${theme.color.background};
 `;
 

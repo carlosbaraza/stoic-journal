@@ -5,7 +5,7 @@ import { Question } from "../components/Question";
 import { SaveButton } from "../components/SaveButton";
 import { ScreenContainer } from "../components/ScreenContainer";
 import styled from "styled-components/native";
-import { theme, paddingTop } from "../shared/theme";
+import { theme } from "../shared/theme";
 import { useGlobalDispatch } from "../shared/context";
 import { uuid } from "uuidv4";
 
@@ -16,7 +16,6 @@ const ScrollView = styled.ScrollView`
 const Container = styled.View`
   flex: 1;
   padding: ${theme.space.l};
-  padding-top: ${paddingTop};
   background-color: ${theme.color.background};
 `;
 
