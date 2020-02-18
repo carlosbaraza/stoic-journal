@@ -10,12 +10,7 @@ type Props = KeyboardAvoidingViewProps & { children: ReactNode };
 
 export const ScreenContainer = (props: Props) => {
   return (
-    <KeyboardAvoidingView
-      enabled
-      behavior={Platform.OS === "android" ? "height" : "position"}
-      style={{ flex: 1 }}
-      {...props}
-    >
+    <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }} {...props}>
       {props.children}
     </KeyboardAvoidingView>
   );
