@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Alert } from "react-native";
 import { Question as QuestionType } from "../types";
 import { Question } from "../components/Question";
@@ -6,8 +6,11 @@ import { SaveButton } from "../components/SaveButton";
 import { ScreenContainer } from "../components/ScreenContainer";
 import styled from "styled-components/native";
 import { theme } from "../shared/theme";
-import { useGlobalDispatch } from "../shared/context";
+import { useGlobalDispatch, useGlobalState } from "../shared/context";
 import { uuid } from "uuidv4";
+import moment from "moment";
+import { JustSubmittedFeedback } from "../components/NewJournal/JustSubmittedFeedback";
+import { AlreadyExistingEntry } from "../components/NewJournal/AlreadyExistingEntry";
 
 const ScrollView = styled.ScrollView`
   background-color: ${theme.color.background};
@@ -59,8 +62,15 @@ const questions: QuestionType[] = [
 
 export function NewJournalScreen() {
   const dispatch = useGlobalDispatch();
+  const state = useGlobalState();
+
+  const alreadyExistingEntry = useMemo(() => {
+    return state.entries.find(e => moment(e.date).isSame(moment(), "day"));
+  }, [state.entries]);
 
   const [answers, setAnswers] = useState(questions.map(() => ""));
+
+  const [hasJustSubmitted, setHasJustSubmitted] = useState(false);
 
   const onSave = () => {
     const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
@@ -68,7 +78,16 @@ export function NewJournalScreen() {
       type: "SAVE_JOURNAL",
       journal: { answers: journalAnswers, id: uuid(), date: new Date() }
     });
+    setHasJustSubmitted(true);
   };
+
+  if (hasJustSubmitted) {
+    return <JustSubmittedFeedback />;
+  }
+
+  if (alreadyExistingEntry) {
+    return <AlreadyExistingEntry entry={alreadyExistingEntry} />;
+  }
 
   return (
     <ScreenContainer>
