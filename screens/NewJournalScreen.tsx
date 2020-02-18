@@ -11,6 +11,7 @@ import { uuid } from "uuidv4";
 import moment from "moment";
 import { JustSubmittedFeedback } from "../components/NewJournal/JustSubmittedFeedback";
 import { AlreadyExistingEntry } from "../components/NewJournal/AlreadyExistingEntry";
+import useAppState from "react-native-appstate-hook";
 
 const ScrollView = styled.ScrollView`
   background-color: ${theme.color.background};
@@ -63,14 +64,12 @@ const questions: QuestionType[] = [
 export function NewJournalScreen() {
   const dispatch = useGlobalDispatch();
   const state = useGlobalState();
-
+  const [answers, setAnswers] = useState(questions.map(() => ""));
+  const [hasJustSubmitted, setHasJustSubmitted] = useState(false);
+  const appState = useAppState({ onChange: () => setHasJustSubmitted(false) });
   const alreadyExistingEntry = useMemo(() => {
     return state.entries.find(e => moment(e.date).isSame(moment(), "day"));
-  }, [state.entries]);
-
-  const [answers, setAnswers] = useState(questions.map(() => ""));
-
-  const [hasJustSubmitted, setHasJustSubmitted] = useState(false);
+  }, [state.entries, appState]);
 
   const onSave = () => {
     const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
