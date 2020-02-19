@@ -1,13 +1,14 @@
 import * as React from "react";
 import { JournalEntry } from "../types";
 import { AsyncStorage } from "react-native";
+import { loadEntries } from "./actions/load-entries";
 
 type Action =
-  | { type: "SAVE_JOURNAL"; journal: JournalEntry }
   | { type: "SET_STATE"; state: State }
+  | { type: "RECEIVE_ENTRIES"; entries: JournalEntry[] }
   | { type: "FACTORY_RESET" };
-type Dispatch = (action: Action) => void;
-type State = { entries: JournalEntry[] };
+export type Dispatch = (action: Action) => void;
+export type State = { entries: JournalEntry[] };
 type GlobalProviderProps = { children: React.ReactNode };
 
 const GlobalStateContext = React.createContext<State | undefined>(undefined);
@@ -15,32 +16,10 @@ const GlobalDispatchContext = React.createContext<Dispatch | undefined>(undefine
 
 export const INITIAL_STATE = { entries: [] };
 
-function globalReduderAsyncStorageWrapper(state: State, action: Action): State {
-  const newState = globalReducer(state, action);
-  if (action.type !== "SET_STATE") {
-    AsyncStorage.setItem("global", JSON.stringify(newState));
-  }
-  return newState;
-}
-
 function globalReducer(state: State, action: Action): State {
   switch (action.type) {
-    case "SAVE_JOURNAL": {
-      const existingEntry = state.entries.find(e => e.id === action.journal.id);
-      if (existingEntry) {
-        return {
-          ...state,
-          entries: state.entries.map(entry => {
-            if (entry.id === action.journal.id) {
-              return action.journal;
-            } else {
-              return entry;
-            }
-          })
-        };
-      } else {
-        return { ...state, entries: [...state.entries, action.journal] };
-      }
+    case "RECEIVE_ENTRIES": {
+      return { ...state, entries: action.entries };
     }
     case "SET_STATE": {
       return action.state;
@@ -52,13 +31,10 @@ function globalReducer(state: State, action: Action): State {
 }
 
 export function GlobalProvider({ children }: GlobalProviderProps) {
-  const [state, dispatch] = React.useReducer(globalReduderAsyncStorageWrapper, INITIAL_STATE);
+  const [state, dispatch] = React.useReducer(globalReducer, INITIAL_STATE);
 
   React.useEffect(() => {
-    AsyncStorage.getItem("global").then(jsonState => {
-      let initialState = JSON.parse(jsonState) || state;
-      dispatch({ type: "SET_STATE", state: initialState });
-    });
+    loadEntries(dispatch);
   }, []);
 
   return (

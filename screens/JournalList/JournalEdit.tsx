@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { Alert } from "react-native";
-import { Question as QuestionType } from "../../types";
 import { Question } from "../../components/Question";
 import { SaveButton } from "../../components/SaveButton";
 import { ScreenContainer } from "../../components/ScreenContainer";
 import styled from "styled-components/native";
 import { theme } from "../../shared/theme";
-import { useGlobalDispatch, useGlobalState } from "../../shared/context";
-import { uuid } from "uuidv4";
+import { useGlobalState } from "../../shared/context";
 import { useNavigationContext } from "./navigation-context";
 import { RouteProp } from "@react-navigation/native";
+import { useSaveEntry } from "../../shared/actions/save-entry";
 
 const ScrollView = styled.ScrollView`
   background-color: ${theme.color.background};
@@ -35,21 +33,20 @@ const styles = {
 type Props = { route: RouteProp<{ "Edit journal": { id: string } }, "Edit journal"> };
 
 export function JournalEdit(props: Props) {
-  const dispatch = useGlobalDispatch();
-  const navigation = useNavigationContext();
+  const saveEntry = useSaveEntry();
   const state = useGlobalState();
+  const navigation = useNavigationContext();
   const id = props.route.params.id;
   const entry = state.entries.find(e => e.id === id);
 
   const [answers, setAnswers] = useState(entry.answers.map(a => a.answer));
   const questions = entry.answers.map(a => a.question);
 
-  const onSave = () => {
+  const onSave = async () => {
     const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
-    dispatch({
-      type: "SAVE_JOURNAL",
-      journal: { answers: journalAnswers, id, date: new Date() }
-    });
+    const entry = { answers: journalAnswers, id, date: new Date() };
+    await saveEntry(entry);
+    navigation.navigate("Journal entries");
   };
 
   return (

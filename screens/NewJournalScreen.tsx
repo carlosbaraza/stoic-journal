@@ -7,6 +7,7 @@ import { ScreenContainer } from "../components/ScreenContainer";
 import styled from "styled-components/native";
 import { theme } from "../shared/theme";
 import { useGlobalDispatch, useGlobalState } from "../shared/context";
+import { useSaveEntry } from "../shared/actions/save-entry";
 import { uuid } from "uuidv4";
 import moment from "moment";
 import { JustSubmittedFeedback } from "../components/NewJournal/JustSubmittedFeedback";
@@ -62,8 +63,8 @@ const questions: QuestionType[] = [
 ];
 
 export function NewJournalScreen() {
-  const dispatch = useGlobalDispatch();
   const state = useGlobalState();
+  const saveEntry = useSaveEntry();
   const [answers, setAnswers] = useState(questions.map(() => ""));
   const [hasJustSubmitted, setHasJustSubmitted] = useState(false);
   const appState = useAppState({ onChange: () => setHasJustSubmitted(false) });
@@ -71,12 +72,10 @@ export function NewJournalScreen() {
     return state.entries.find(e => moment(e.date).isSame(moment(), "day"));
   }, [state.entries, appState]);
 
-  const onSave = () => {
+  const onSave = async () => {
     const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
-    dispatch({
-      type: "SAVE_JOURNAL",
-      journal: { answers: journalAnswers, id: uuid(), date: new Date() }
-    });
+    const entry = { answers: journalAnswers, id: uuid(), date: new Date() };
+    await saveEntry(entry);
     setHasJustSubmitted(true);
   };
 
