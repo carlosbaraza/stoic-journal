@@ -38,15 +38,15 @@ const styles = {
 const questions: QuestionType[] = [
   {
     text: "What did I do wrong?",
-    placeholder: "Met Marco, but I was too caught in my own thoughts..."
+    placeholder: "Met Marco, but I didn't pay attention to what he said..."
   },
   {
     text: "What did I do right?",
-    placeholder: "I was kind to that person that stepped on me in the tube..."
+    placeholder: "I was kind to that person that stepped on my toes..."
   },
   {
     text: "What could I have done differently?",
-    placeholder: "I was lucky enough to meet Marco, and I should have been fully present..."
+    placeholder: "I should have been fully present while talking to Marco..."
   },
   {
     text: "What am I grateful for?",
@@ -54,7 +54,7 @@ const questions: QuestionType[] = [
   },
   {
     text: "What would make today great?",
-    placeholder: "Meeting Marco again..."
+    placeholder: "Meeting Marco, Seneca and Epictetus..."
   },
   {
     text: "What is my affirmation (mantra) for the day?",
