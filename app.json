@@ -4,11 +4,7 @@
     "slug": "StoicJournal",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,9 +16,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.baraza.stoicjournal",
@@ -32,7 +26,14 @@
     "githubUrl": "https://github.com/carlosbaraza/stoic-journal",
     "android": {
       "package": "com.baraza.stoicjournal",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "USE_FINGERPRINT",
+        "VIBRATE",
+        "WRITE_EXTERNAL_STORAGE",
+        "com.android.launcher.permission.INSTALL_SHORTCUT"
+      ]
     },
     "androidStatusBar": {
       "backgroundColor": "#222"
