@@ -1,11 +1,13 @@
 import React, { createContext, useContext } from "react";
 import { NavigationProp } from "@react-navigation/native";
+import { DateObject } from "react-native-calendars";
 
 export type RouteParams = {
   "Edit journal": { id: string };
+  "New journal": { date: DateObject };
   "Journal entries": {};
   Journal: {};
-  New: {};
+  Today: {};
   Settings: {};
 };
 

@@ -3,7 +3,8 @@ import { createStackNavigator, TransitionPresets } from "@react-navigation/stack
 import { JournalList } from "./JournalList";
 import { theme } from "../../shared/theme";
 import { JournalEdit } from "./JournalEdit";
-import { RouteParams } from "../../context/navigation";
+import { RouteParams } from "../../shared/navigation-context";
+import { JournalNew } from "./JournalNew";
 
 const Stack = createStackNavigator<RouteParams>();
 
@@ -23,6 +24,7 @@ export const JournalNavigator = (props: Props) => {
     >
       <Stack.Screen name="Journal entries" component={JournalList} />
       <Stack.Screen name="Edit journal" component={JournalEdit} />
+      <Stack.Screen name="New journal" component={JournalNew} />
     </Stack.Navigator>
   );
 };

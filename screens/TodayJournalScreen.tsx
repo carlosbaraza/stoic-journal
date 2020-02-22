@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { Alert } from "react-native";
-import { Question as QuestionType } from "../types";
 import { Question } from "../components/Question";
 import { SaveButton } from "../components/SaveButton";
 import { ScreenContainer } from "../components/ScreenContainer";
@@ -13,6 +12,7 @@ import moment from "moment";
 import { JustSubmittedFeedback } from "../components/NewJournal/JustSubmittedFeedback";
 import { AlreadyExistingEntry } from "../components/NewJournal/AlreadyExistingEntry";
 import useAppState from "react-native-appstate-hook";
+import { INITIAL_QUESTIONS } from "../shared/questions";
 
 const ScrollView = styled.ScrollView`
   background-color: ${theme.color.background};
@@ -35,37 +35,10 @@ const styles = {
   }
 };
 
-const questions: QuestionType[] = [
-  {
-    text: "What did I do wrong?",
-    placeholder: "Met Marco, but I didn't pay attention to what he said..."
-  },
-  {
-    text: "What did I do right?",
-    placeholder: "I was kind to that person that stepped on my toes..."
-  },
-  {
-    text: "What could I have done differently?",
-    placeholder: "I should have been fully present while talking to Marco..."
-  },
-  {
-    text: "What am I grateful for?",
-    placeholder: "Having the opportunity to work with such amazing people..."
-  },
-  {
-    text: "What would make today great?",
-    placeholder: "Meeting Marco, Seneca and Epictetus..."
-  },
-  {
-    text: "What is my affirmation (mantra) for the day?",
-    placeholder: "Focus and kindness"
-  }
-];
-
-export function NewJournalScreen() {
+export function TodayJournalScreen() {
   const state = useGlobalState();
   const saveEntry = useSaveEntry();
-  const [answers, setAnswers] = useState(questions.map(() => ""));
+  const [answers, setAnswers] = useState(INITIAL_QUESTIONS.map(() => ""));
   const [hasJustSubmitted, setHasJustSubmitted] = useState(false);
   const appState = useAppState({ onChange: () => setHasJustSubmitted(false) });
   const alreadyExistingEntry = useMemo(() => {
@@ -73,7 +46,10 @@ export function NewJournalScreen() {
   }, [state.entries, appState]);
 
   const onSave = async () => {
-    const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
+    const journalAnswers = INITIAL_QUESTIONS.map((question, i) => ({
+      question,
+      answer: answers[i]
+    }));
     const entry = { answers: journalAnswers, id: uuid(), date: new Date() };
     await saveEntry(entry);
     setHasJustSubmitted(true);
@@ -91,7 +67,7 @@ export function NewJournalScreen() {
     <ScreenContainer>
       <ScrollView contentContainerStyle={styles.container}>
         <Container>
-          {questions.map((question, i) => (
+          {INITIAL_QUESTIONS.map((question, i) => (
             <Question
               key={i}
               question={question}

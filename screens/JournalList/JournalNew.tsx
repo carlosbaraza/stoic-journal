@@ -8,6 +8,9 @@ import { useGlobalState } from "../../shared/context";
 import { useNavigationContext } from "../../shared/navigation-context";
 import { RouteProp } from "@react-navigation/native";
 import { useSaveEntry } from "../../shared/actions/save-entry";
+import { DateObject } from "react-native-calendars";
+import { INITIAL_QUESTIONS } from "../../shared/questions";
+import { uuid } from "uuidv4";
 
 const ScrollView = styled.ScrollView`
   background-color: ${theme.color.background};
@@ -30,21 +33,20 @@ const styles = {
   }
 };
 
-type Props = { route: RouteProp<{ "Edit journal": { id: string } }, "Edit journal"> };
+type Props = { route: RouteProp<{ "New journal": { date: DateObject } }, "New journal"> };
 
-export function JournalEdit(props: Props) {
+export function JournalNew(props: Props) {
   const saveEntry = useSaveEntry();
   const state = useGlobalState();
   const navigation = useNavigationContext();
-  const id = props.route.params.id;
-  const entry = state.entries.find(e => e.id === id);
+  const date = props.route.params.date;
 
-  const [answers, setAnswers] = useState(entry.answers.map(a => a.answer));
-  const questions = entry.answers.map(a => a.question);
+  const questions = INITIAL_QUESTIONS;
+  const [answers, setAnswers] = useState(questions.map(() => ""));
 
   const onSave = async () => {
     const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
-    const entry = { answers: journalAnswers, id, date: new Date() };
+    const entry = { answers: journalAnswers, id: uuid(), date: new Date(date.dateString) };
     await saveEntry(entry);
     navigation.navigate("Journal entries");
   };

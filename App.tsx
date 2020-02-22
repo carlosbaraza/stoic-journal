@@ -5,12 +5,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { theme, statusBarHeight } from "./shared/theme";
 import { JournalNavigator } from "./screens/JournalList/JournalNavigator";
-import { NewJournalScreen } from "./screens/NewJournalScreen";
+import { TodayJournalScreen } from "./screens/TodayJournalScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { GlobalProvider } from "./shared/context";
 import styled from "styled-components/native";
 import { useAsyncAssets } from "./shared/assets";
-import { withNavigationContext } from "./context/navigation";
+import { withNavigationContext } from "./shared/navigation-context";
 
 const TopSafeAreaPadding = styled.SafeAreaView`
   flex: 0;
@@ -76,8 +76,8 @@ function BottomNavigator() {
         }}
       />
       <Tab.Screen
-        name="New"
-        component={withNavigationContext(NewJournalScreen)}
+        name="Today"
+        component={withNavigationContext(TodayJournalScreen)}
         options={{
           tabBarLabel: "Today",
           tabBarIcon: props => (
