@@ -6,7 +6,7 @@ import { NavigationProp } from "@react-navigation/native";
 import { ScreenContainer } from "../../components/ScreenContainer";
 import { CalendarList, DateObject } from "react-native-calendars";
 import moment from "moment";
-import { useNavigationContext } from "./navigation-context";
+import { useNavigationContext } from "../../context/navigation";
 
 type Props = {
   navigation: NavigationProp<{}>;
@@ -26,6 +26,8 @@ export const JournalList = (props: Props) => {
     const entry = entries.find(e => moment(e.date).format("YYYY-MM-DD") === day.dateString);
     if (entry) {
       navigation.navigate("Edit journal", { id: entry.id });
+    } else {
+      navigation.navigate("New" as any);
     }
   };
 

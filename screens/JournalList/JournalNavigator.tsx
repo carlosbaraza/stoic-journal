@@ -3,10 +3,9 @@ import { createStackNavigator, TransitionPresets } from "@react-navigation/stack
 import { JournalList } from "./JournalList";
 import { theme } from "../../shared/theme";
 import { JournalEdit } from "./JournalEdit";
-import { withNavigationContext } from "./navigation-context";
+import { RouteParams } from "../../context/navigation";
 
-export type JournalStackRouteParams = { "Edit journal": { id: string }; "Journal entries": {} };
-const Stack = createStackNavigator<JournalStackRouteParams>();
+const Stack = createStackNavigator<RouteParams>();
 
 type Props = {};
 
@@ -22,8 +21,8 @@ export const JournalNavigator = (props: Props) => {
       }}
       mode="card"
     >
-      <Stack.Screen name="Journal entries" component={withNavigationContext(JournalList)} />
-      <Stack.Screen name="Edit journal" component={withNavigationContext(JournalEdit)} />
+      <Stack.Screen name="Journal entries" component={JournalList} />
+      <Stack.Screen name="Edit journal" component={JournalEdit} />
     </Stack.Navigator>
   );
 };

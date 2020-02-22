@@ -10,6 +10,7 @@ import { SettingsScreen } from "./screens/SettingsScreen";
 import { GlobalProvider } from "./shared/context";
 import styled from "styled-components/native";
 import { useAsyncAssets } from "./shared/assets";
+import { withNavigationContext } from "./context/navigation";
 
 const TopSafeAreaPadding = styled.SafeAreaView`
   flex: 0;
@@ -66,7 +67,7 @@ function BottomNavigator() {
     >
       <Tab.Screen
         name="Journal"
-        component={JournalNavigator}
+        component={withNavigationContext(JournalNavigator)}
         options={{
           tabBarLabel: "Journal",
           tabBarIcon: props => (
@@ -76,7 +77,7 @@ function BottomNavigator() {
       />
       <Tab.Screen
         name="New"
-        component={NewJournalScreen}
+        component={withNavigationContext(NewJournalScreen)}
         options={{
           tabBarLabel: "Today",
           tabBarIcon: props => (
@@ -86,7 +87,7 @@ function BottomNavigator() {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={withNavigationContext(SettingsScreen)}
         options={{
           tabBarIcon: props => (
             <AntDesign name="setting" color={props.color} size={props.focused ? 24 : 20} />

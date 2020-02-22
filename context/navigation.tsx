@@ -1,8 +1,15 @@
 import React, { createContext, useContext } from "react";
 import { NavigationProp } from "@react-navigation/native";
-import { JournalStackRouteParams } from "./JournalNavigator";
 
-type NavigationP = NavigationProp<JournalStackRouteParams>;
+export type RouteParams = {
+  "Edit journal": { id: string };
+  "Journal entries": {};
+  Journal: {};
+  New: {};
+  Settings: {};
+};
+
+type NavigationP = NavigationProp<RouteParams>;
 const Navigation = createContext<NavigationP>(null);
 
 export const useNavigationContext = (): NavigationP => {

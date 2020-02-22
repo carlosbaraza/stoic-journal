@@ -5,7 +5,7 @@ import { ScreenContainer } from "../../components/ScreenContainer";
 import styled from "styled-components/native";
 import { theme } from "../../shared/theme";
 import { useGlobalState } from "../../shared/context";
-import { useNavigationContext } from "./navigation-context";
+import { useNavigationContext } from "../../context/navigation";
 import { RouteProp } from "@react-navigation/native";
 import { useSaveEntry } from "../../shared/actions/save-entry";
 
