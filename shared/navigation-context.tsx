@@ -9,9 +9,12 @@ export type RouteParams = {
   Journal: {};
   Today: {};
   Settings: {};
+  "Settings - Daily questions": {};
+  "Settings - Edit daily question": { id: string };
+  "Settings - New daily question": {};
 };
 
-type NavigationP = NavigationProp<RouteParams>;
+export type NavigationP = NavigationProp<RouteParams>;
 const Navigation = createContext<NavigationP>(null);
 
 export const useNavigationContext = (): NavigationP => {

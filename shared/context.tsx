@@ -1,25 +1,22 @@
 import * as React from "react";
-import { JournalEntry } from "../types";
-import { AsyncStorage } from "react-native";
+import { JournalEntry, Question } from "../types";
 import { loadEntries } from "./actions/load-entries";
-
-type Action =
-  | { type: "SET_STATE"; state: State }
-  | { type: "RECEIVE_ENTRIES"; entries: JournalEntry[] }
-  | { type: "FACTORY_RESET" };
-export type Dispatch = (action: Action) => void;
-export type State = { entries: JournalEntry[] };
-type GlobalProviderProps = { children: React.ReactNode };
+import { loadQuestions } from "./actions/load-questions";
+import { startupLoad } from "./actions/startup-load";
+import { State, Dispatch, Action, GlobalProviderProps } from "./context-types";
 
 const GlobalStateContext = React.createContext<State | undefined>(undefined);
 const GlobalDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
-export const INITIAL_STATE = { entries: [] };
+export const INITIAL_STATE = { entries: [], questions: [] };
 
 function globalReducer(state: State, action: Action): State {
   switch (action.type) {
     case "RECEIVE_ENTRIES": {
       return { ...state, entries: action.entries };
+    }
+    case "RECEIVE_QUESTIONS": {
+      return { ...state, questions: action.questions };
     }
     case "SET_STATE": {
       return action.state;
@@ -34,7 +31,7 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
   const [state, dispatch] = React.useReducer(globalReducer, INITIAL_STATE);
 
   React.useEffect(() => {
-    loadEntries(dispatch);
+    startupLoad(dispatch);
   }, []);
 
   return (

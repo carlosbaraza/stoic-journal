@@ -1,4 +1,5 @@
-import { Dispatch, State, useGlobalState } from "./../context";
+import { useGlobalState } from "./../context";
+import { Dispatch, State } from "./../context-types";
 import { store } from "./../store";
 import { JournalEntry } from "./../../types";
 import { useGlobalDispatch } from "../context";

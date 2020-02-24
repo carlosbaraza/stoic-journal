@@ -9,7 +9,6 @@ import { useNavigationContext } from "../../shared/navigation-context";
 import { RouteProp } from "@react-navigation/native";
 import { useSaveEntry } from "../../shared/actions/save-entry";
 import { DateObject } from "react-native-calendars";
-import { INITIAL_QUESTIONS } from "../../shared/questions";
 import { uuid } from "uuidv4";
 
 const ScrollView = styled.ScrollView`
@@ -41,7 +40,7 @@ export function JournalNew(props: Props) {
   const navigation = useNavigationContext();
   const date = props.route.params.date;
 
-  const questions = INITIAL_QUESTIONS;
+  const questions = state.questions;
   const [answers, setAnswers] = useState(questions.map(() => ""));
 
   const onSave = async () => {

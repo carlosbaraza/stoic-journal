@@ -1,16 +1,16 @@
-import React from "react";
-import { StatusBar, SafeAreaView, Text, Image, Platform } from "react-native";
+import React, { useState } from "react";
+import { StatusBar, SafeAreaView, Text, Image, Platform, TouchableOpacity } from "react-native";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { theme, statusBarHeight } from "./shared/theme";
 import { JournalNavigator } from "./screens/JournalList/JournalNavigator";
 import { TodayJournalScreen } from "./screens/TodayJournalScreen";
-import { SettingsScreen } from "./screens/SettingsScreen";
 import { GlobalProvider } from "./shared/context";
 import styled from "styled-components/native";
 import { useAsyncAssets } from "./shared/assets";
 import { withNavigationContext } from "./shared/navigation-context";
+import { SettingsNavigator } from "./screens/Settings/SettingsNavigator";
 
 const TopSafeAreaPadding = styled.SafeAreaView`
   flex: 0;
@@ -87,7 +87,7 @@ function BottomNavigator() {
       />
       <Tab.Screen
         name="Settings"
-        component={withNavigationContext(SettingsScreen)}
+        component={withNavigationContext(SettingsNavigator)}
         options={{
           tabBarIcon: props => (
             <AntDesign name="setting" color={props.color} size={props.focused ? 24 : 20} />

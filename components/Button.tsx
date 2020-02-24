@@ -4,9 +4,9 @@ import { theme } from "../shared/theme";
 import { Touchable } from "./Touchable";
 import { TouchableOpacity } from "react-native";
 
-const View = styled.View`
+const View = styled.View<{ disabled: boolean }>`
   flex: 1;
-  background-color: ${theme.color.button};
+  background-color: ${p => (p.disabled ? "#AAA" : theme.color.button)};
   padding: ${theme.space.m};
   border: none;
   border-radius: ${theme.space.m};
@@ -22,13 +22,14 @@ const Text = styled.Text`
 
 type Props = {
   onPress(): void;
+  disabled?: boolean;
 };
 
 export const Button = (props: Props) => {
   return (
-    <Touchable onPress={props.onPress}>
-      <View>
-        <Text>Save journal</Text>
+    <Touchable onPress={() => !props.disabled && props.onPress()} style={{ flex: 1 }}>
+      <View disabled={props.disabled}>
+        <Text>Save changes</Text>
       </View>
     </Touchable>
   );

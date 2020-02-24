@@ -3,6 +3,7 @@ import { Button } from "./Button";
 
 type Props = {
   onPress(): void;
+  disabled?: boolean;
 };
 
 export const SaveButton = (props: Props) => {

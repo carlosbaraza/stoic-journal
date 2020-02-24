@@ -12,7 +12,6 @@ import moment from "moment";
 import { JustSubmittedFeedback } from "../components/NewJournal/JustSubmittedFeedback";
 import { AlreadyExistingEntry } from "../components/NewJournal/AlreadyExistingEntry";
 import useAppState from "react-native-appstate-hook";
-import { INITIAL_QUESTIONS } from "../shared/questions";
 
 const ScrollView = styled.ScrollView`
   background-color: ${theme.color.background};
@@ -38,7 +37,8 @@ const styles = {
 export function TodayJournalScreen() {
   const state = useGlobalState();
   const saveEntry = useSaveEntry();
-  const [answers, setAnswers] = useState(INITIAL_QUESTIONS.map(() => ""));
+  const { questions } = state;
+  const [answers, setAnswers] = useState(questions.map(() => ""));
   const [hasJustSubmitted, setHasJustSubmitted] = useState(false);
   const appState = useAppState({ onChange: () => setHasJustSubmitted(false) });
   const alreadyExistingEntry = useMemo(() => {
@@ -46,7 +46,7 @@ export function TodayJournalScreen() {
   }, [state.entries, appState]);
 
   const onSave = async () => {
-    const journalAnswers = INITIAL_QUESTIONS.map((question, i) => ({
+    const journalAnswers = questions.map((question, i) => ({
       question,
       answer: answers[i]
     }));
@@ -67,7 +67,7 @@ export function TodayJournalScreen() {
     <ScreenContainer>
       <ScrollView contentContainerStyle={styles.container}>
         <Container>
-          {INITIAL_QUESTIONS.map((question, i) => (
+          {questions.map((question, i) => (
             <Question
               key={i}
               question={question}

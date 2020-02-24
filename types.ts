@@ -1,4 +1,5 @@
 export type Question = {
+  id: string;
   text: string;
   placeholder: string;
 };

@@ -1,4 +1,4 @@
-import { Dispatch, State } from "./../context";
+import { Dispatch, State } from "./../context-types";
 import { store } from "./../store";
 import { JournalEntry } from "./../../types";
 
