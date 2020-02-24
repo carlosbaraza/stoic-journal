@@ -44,8 +44,8 @@ export function JournalEdit(props: Props) {
 
   const onSave = async () => {
     const journalAnswers = questions.map((question, i) => ({ question, answer: answers[i] }));
-    const entry = { answers: journalAnswers, id, date: new Date() };
-    await saveEntry(entry);
+    const newEntry = { ...entry, answers: journalAnswers };
+    await saveEntry(newEntry);
     navigation.navigate("Journal entries");
   };
 
