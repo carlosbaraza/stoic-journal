@@ -8,6 +8,7 @@ import { Alert, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useNavigationContext } from "../../shared/navigation-context";
 import { factoryReset } from "../../shared/actions/factory-reset";
+import { ScreenContainer } from "../../components/ScreenContainer";
 
 const Container = styled.ScrollView`
   flex: 1;
@@ -31,41 +32,43 @@ export const Settings = (props: Props) => {
   const navigation = useNavigationContext();
 
   return (
-    <Container>
-      <Section isFirstChild>
-        <PaddedContainer>
-          <Heading>Questions</Heading>
-        </PaddedContainer>
-        <FlatListButton
-          title="Change daily questions"
-          onPress={() => {
-            navigation.navigate("Settings - Daily questions");
-          }}
-        />
-      </Section>
-      <Section>
-        <PaddedContainer>
-          <Heading>Your data</Heading>
-        </PaddedContainer>
-        <FlatListButton
-          title="Factory reset"
-          onPress={() => {
-            Alert.alert(
-              "Factory reset",
-              "Are you sure you want to delete all the data?",
-              [
-                {
-                  text: "Cancel",
-                  onPress: () => {},
-                  style: "cancel"
-                },
-                { text: "Delete", onPress: () => factoryReset(dispatch) }
-              ],
-              { cancelable: false }
-            );
-          }}
-        />
-      </Section>
-    </Container>
+    <ScreenContainer>
+      <Container>
+        <Section isFirstChild>
+          <PaddedContainer>
+            <Heading>Questions</Heading>
+          </PaddedContainer>
+          <FlatListButton
+            title="Change daily questions"
+            onPress={() => {
+              navigation.navigate("Settings - Daily questions");
+            }}
+          />
+        </Section>
+        <Section>
+          <PaddedContainer>
+            <Heading>Your data</Heading>
+          </PaddedContainer>
+          <FlatListButton
+            title="Factory reset"
+            onPress={() => {
+              Alert.alert(
+                "Factory reset",
+                "Are you sure you want to delete all the data?",
+                [
+                  {
+                    text: "Cancel",
+                    onPress: () => {},
+                    style: "cancel"
+                  },
+                  { text: "Delete", onPress: () => factoryReset(dispatch) }
+                ],
+                { cancelable: false }
+              );
+            }}
+          />
+        </Section>
+      </Container>
+    </ScreenContainer>
   );
 };

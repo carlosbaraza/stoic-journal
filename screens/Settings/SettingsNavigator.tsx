@@ -9,7 +9,7 @@ const Stack = createStackNavigator<RouteParams>();
 
 type Props = {};
 
-export const SettingsNavigator = (props: any) => {
+export const SettingsNavigator = (props: Props) => {
   return (
     <Stack.Navigator
       screenOptions={{
