@@ -5,12 +5,11 @@ import { INITIAL_QUESTIONS } from "../init-questions";
 import { saveQuestionNoDispatch } from "../services/questions";
 
 export async function loadQuestions(dispatch: Dispatch) {
-  const areQuestionsInit = await store.get("questions-init");
+  const questionIds = await store.get("question-ids");
 
-  if (areQuestionsInit) {
-    const keys = await store.keys();
-    const dailyQuestionKeys = keys.filter(e => e.includes("question-"));
-    const questions: Question[] = await store.get(dailyQuestionKeys);
+  if (questionIds) {
+    const keys = questionIds.map(id => `question-${id}`);
+    const questions: Question[] = await store.get(keys);
     dispatch({ type: "RECEIVE_QUESTIONS", questions });
   } else {
     await initQuestions(dispatch);
@@ -20,6 +19,9 @@ export async function loadQuestions(dispatch: Dispatch) {
 // Add questions to database
 async function initQuestions(dispatch: Dispatch) {
   await Promise.all(INITIAL_QUESTIONS.map(question => saveQuestionNoDispatch(question)));
-  await store.save("questions-init", true);
+  await store.save(
+    "question-ids",
+    INITIAL_QUESTIONS.map(q => q.id)
+  );
   dispatch({ type: "RECEIVE_QUESTIONS", questions: INITIAL_QUESTIONS });
 }
